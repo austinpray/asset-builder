@@ -7,6 +7,7 @@ var fs = require('fs');
 var m  = require('../lib/index');
 var bower = require('bower');
 var Q = require('q');
+var mkdirp = require('mkdirp');
 
 function bowerSetup(bowerJson) {
   bowerJson = bowerJson || 'bower.json';
@@ -23,11 +24,14 @@ function bowerSetup(bowerJson) {
 describe('Properties', function(){
   var manifest;
   beforeEach(function(done){
-    bowerSetup().then(function () {
-      manifest = m('./fixtures/manifest.json', {
-        bowerJsonDirectory: './tmp/',
+    this.timeout(1e5);
+    mkdirp('test/tmp', function() { 
+      bowerSetup().then(function () {
+        manifest = m('./fixtures/manifest.json', {
+          bowerJsonDirectory: './tmp/',
+        });
+        done();
       });
-      done();
     });
   });
   it('should have a buildPaths property', function(){
