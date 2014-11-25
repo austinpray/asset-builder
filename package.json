@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/austinpray/asset-builder",
   "devDependencies": {
-    "chai": "^1.10.0",
-    "mocha": "^2.0.1"
+    "bower": "*",
+    "chai": "*",
+    "mocha": "*",
+    "q": "^1.1.2"
   },
   "dependencies": {
     "lodash": "^2.4.1",

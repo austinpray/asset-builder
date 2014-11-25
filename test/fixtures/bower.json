@@ -1,0 +1,43 @@
+{
+  "name": "roots",
+  "version": "7.0.2",
+  "homepage": "http://roots.io",
+  "authors": [
+    "Ben Word <ben@benword.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "assets/vendor"
+  ],
+  "dependencies": {
+    "modernizr": "2.8.2",
+    "jquery": "1.11.1",
+    "bootstrap": "3.3.1"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "./less/bootstrap.less",
+        "./js/transition.js",
+        "./js/alert.js",
+        "./js/button.js",
+        "./js/carousel.js",
+        "./js/collapse.js",
+        "./js/dropdown.js",
+        "./js/modal.js",
+        "./js/tooltip.js",
+        "./js/popover.js",
+        "./js/scrollspy.js",
+        "./js/tab.js",
+        "./js/affix.js",
+        "./fonts/glyphicons-halflings-regular.eot",
+        "./fonts/glyphicons-halflings-regular.svg",
+        "./fonts/glyphicons-halflings-regular.ttf",
+        "./fonts/glyphicons-halflings-regular.woff"
+      ]
+    }
+  }
+}
