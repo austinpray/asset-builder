@@ -5,8 +5,8 @@
         "scripts/**/*",
         "scripts/main.js"
       ],
-      "main": true
-      "vendor": [],
+      "main": true,
+      "vendor": []
     },
     "app.css": {
       "files": [
