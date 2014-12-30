@@ -9,22 +9,12 @@
       "vendor": []
     },
     "app.css": {
-      "files": [
-        "styles/main.less"
-      ],
+      "files": "styles/main.less",
       "main": true
     },
     "home.js": {
-      "files": [
-        "scripts/home.js"
-      ],
+      "files": "scripts/home.js",
       "bower": ["slick.js"]
-    },
-    "noappend.js": {
-      "files": [
-        "../themedir/home.js"
-      ],
-      "external": true
     },
     "jquery.js": {
       "bower": ["jquery"]
