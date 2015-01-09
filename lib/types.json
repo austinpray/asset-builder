@@ -1,0 +1,5 @@
+{
+  "fonts": "*.{eot,svg,ttf,woff}",
+  "js": "*.js",
+  "css": "*.{css,less,scss,sass}"
+}

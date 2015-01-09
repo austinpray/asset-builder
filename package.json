@@ -4,9 +4,10 @@
   "description": "asset-builder =============",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test",
-    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "jshint": "jshint lib/*.js"
+    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec test",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "jshint": "jshint lib/*.js",
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   "dependencies": {
     "lodash": "^2.4.1",
     "main-bower-files": "^2.4.0",
+    "minimatch": "^2.0.1",
     "object-path": "^0.8.0",
     "traverse": "^0.6.6",
     "wiredep": "^2.2.0"

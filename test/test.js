@@ -8,6 +8,7 @@ var m               = require('../lib/index');
 var readManifest    = require('../lib/readManifest');
 var processManifest = require('../lib/processManifest');
 var buildGlobs      = require('../lib/buildGlobs');
+var Dependency      = require('../lib/Dependency');
 var bower           = require('bower');
 var Q               = require('q');
 var mkdirp          = require('mkdirp');
@@ -43,6 +44,11 @@ describe('Processing the Manifest', function(){
       manifest = processManifest(readManifest('test/fixtures/manifest-missing.json'));
     }, Error, 'Manifest File Error: missing');
   });
+  it('should throw an error if the json file is not a plain object', function () {
+    assert.throws(function () {
+      manifest = processManifest([ { 'lol': 'not valid' } ]);
+    }, Error, 'Manifest File Error: file seems');
+  });
   it('should turn all "files" strings into arrays', function(){
     manifest = processManifest(readManifest('test/fixtures/manifest-mixed.json'));
     assert.isArray(manifest.dependencies['app.css'].files);
@@ -55,16 +61,61 @@ describe('Processing the Manifest', function(){
   });
 });
 
+describe('Dependency', function () {
+  var dep = new Dependency('app.js', {
+    vendor: ['test.js'],
+    files: ['test1.js']
+  });
+  var depBare = new Dependency('app.css', {
+  });
+  it('should set properties correctly', function () {
+    assert.equal(dep.type, 'js');
+    assert.equal(depBare.type, 'css');
+    assert.sameMembers(dep.globs, [
+      'test.js',
+      'test1.js'
+    ]);
+    assert.sameMembers(depBare.globs, []);
+  });
+  it('should prependGlobs correctly', function () {
+    dep.prependGlobs('new.js');
+    assert.sameMembers(dep.globs, [
+      'new.js',
+      'test.js',
+      'test1.js'
+    ]);
+  });
+});
+
 describe('Glob building', function () {
   var manifest;
   var mockBowerFiles = require('./fixtures/sampleMainBowerFiles.json').files;
   var globInstance = new buildGlobs(manifest, mockBowerFiles);
   describe('filtering by package', function () {
-    it('should get particular package files', function () {
-      var jq = globInstance.filterByPackage(mockBowerFiles, 'jquery');
+    it('should get particular package files by string', function () {
+      var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, 'jquery');
       assert.isArray(jq);
       assert.sameMembers(jq, [
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+      ]);
+    });
+    it('should get particular package files by array', function () {
+      var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, ['jquery']);
+      assert.isArray(jq);
+      assert.sameMembers(jq, [
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+      ]);
+    });
+  });
+
+  describe('rejecting by package', function () {
+    it('should return everything except specified packages', function () {
+      var rejected = buildGlobs.prototype.rejectByPackage([
+        '/bogus/bower_components/jquery/main.js',
+        '/bogus/bower_components/mootools/main.js'
+      ], ['jquery']);
+      assert.sameMembers(rejected, [
+        '/bogus/bower_components/mootools/main.js'
       ]);
     });
   });
@@ -105,16 +156,111 @@ describe('Glob building', function () {
     });
   });
 
-  describe('output globs', function () {
+  describe('build a list of Dependency objects', function () {
+    it('should get js files', function () {
+    });
   });
 
+  describe('output globs', function () {
+    var dependencies = {
+      "app.js": {
+        files: ['path/to/script.js']
+      },
+      fonts: {
+        files: ['font/path/*']
+      },
+      images: {
+        files: ['image/path/*']
+      }
+    };
+    var bower = [
+      '/lol/fonts/test.woff'
+    ];
+    it('should output a fonts glob', function () {
+      assert.sameMembers(new buildGlobs(dependencies, bower).globs.fonts, [
+        'font/path/*',
+        '/lol/fonts/test.woff'
+      ]);
+    });
+    it('should output an images glob', function () {
+      assert.sameMembers(new buildGlobs(dependencies, bower).globs.images, [
+        'image/path/*'
+      ]);
+    });
+    it('should output a bower glob', function () {
+      assert.sameMembers(new buildGlobs(dependencies, bower).globs.bower, bower);
+    });
+  });
+
+  describe('excluded bower dependencies from main', function () {
+  });
+
+  describe('getting output files', function () {
+    var mockBower = [
+      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
+      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
+    ];
+    it('should add bower deps to the main dependency', function () {
+      var expected = [
+        {
+          type: 'js',
+          name: 'app.js',
+          globs: [].concat(mockBower, ['path/to/script.js'])
+        }
+      ];
+      var actual = buildGlobs.prototype.getOutputFiles('js', {
+        "app.js": {
+          files: ['path/to/script.js'],
+          main: true
+        }
+      },
+      mockBower);
+      assert.sameMembers(actual[0].globs, expected[0].globs);
+    });
+    it('should add everything except jquery if defined elsewhere', function () {
+      var expected = [
+        {
+          type: 'js',
+          name: 'app.js',
+          globs: [
+            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
+            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
+            "path/to/script.js"
+          ]
+        },
+        {
+          type: 'js',
+          name: 'jquery.js',
+          globs: [
+            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+          ]
+        }
+      ];
+      var actual = buildGlobs.prototype.getOutputFiles('js', {
+        "app.js": {
+          files: ['path/to/script.js'],
+          main: true
+        },
+        "jquery.js": {
+          bower: ['jquery']
+        }
+      },
+      mockBower);
+      assert.sameMembers(actual[0].globs, expected[0].globs, 'app.js not the same');
+      assert.sameMembers(actual[1].globs, expected[1].globs, 'jquery not the same');
+    });
+  });
 });
 
 describe('Integration Tests', function () {
   describe('Bower', function () {
     beforeEach(function(done) {
-      bowerSetup().then(function () {
-        done();
+      this.timeout(30e3);
+      mkdirp('test/tmp', function () {
+        bowerSetup().then(function () {
+          done();
+        });
       });
     });
 

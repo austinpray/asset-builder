@@ -32,5 +32,10 @@
     "modernizr.js": {
       "bower": ["modernizr.js"]
     }
+  },
+  "paths": {
+    "source": "assets/",
+    "dist": "dist/",
+    "vendor": "vendor/"
   }
 }
