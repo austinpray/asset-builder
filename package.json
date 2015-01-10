@@ -1,6 +1,6 @@
 {
   "name": "asset-builder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "asset-builder =============",
   "main": "lib/index.js",
   "scripts": {
@@ -35,6 +35,6 @@
     "minimatch": "^2.0.1",
     "object-path": "^0.8.0",
     "traverse": "^0.6.6",
-    "wiredep": "^2.2.0"
+    "wiredep": "^2.2.2"
   }
 }
