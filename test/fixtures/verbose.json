@@ -1,0 +1,37 @@
+{
+  "dependencies": {
+    "app.js": {
+      "files": [
+        "scripts/**/*",
+        "scripts/main.js"
+      ],
+      "main": true
+    },
+    "app.css": {
+      "files": [
+        "styles/main.less"
+      ],
+      "main": true
+    },
+    "external.js": {
+      "files": [
+        "../../noappend.js"
+      ],
+      "external": true
+    },
+    "vendor.js": {
+      "files": [
+        "scripts/somescript.js"
+      ],
+      "vendor": [
+        "../../plugin/script.js"
+      ]
+    },
+    "jquery.js": {
+      "bower": ["jquery"]
+    },
+    "modernizr.js": {
+      "bower": ["modernizr"]
+    }
+  }
+}

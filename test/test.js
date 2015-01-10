@@ -12,6 +12,7 @@ var Dependency      = require('../lib/Dependency');
 var bower           = require('bower');
 var Q               = require('q');
 var mkdirp          = require('mkdirp');
+var _               = require('lodash');
 
 function bowerSetup(bowerJson) {
   bowerJson = bowerJson || 'bower.json';
@@ -148,16 +149,8 @@ describe('Glob building', function () {
     });
     it('should get css', function () {
       assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'css'), [
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/less/bootstrap.less",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.scss",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.sass",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.css",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.css"
       ]);
-    });
-  });
-
-  describe('build a list of Dependency objects', function () {
-    it('should get js files', function () {
     });
   });
 
@@ -193,6 +186,22 @@ describe('Glob building', function () {
   });
 
   describe('excluded bower dependencies from main', function () {
+    it('should build a list of bower packages to exclude', function () {
+      var deps = {
+        "random.js": {
+          bower: ['jquery']
+        },
+        "other.js": {
+          bower: ['bootstrap', 'bogus']
+        }
+      };
+      var exclude = buildGlobs.prototype.bowerExclude(deps);
+      assert.sameMembers(exclude, [
+        'jquery',
+        'bootstrap',
+        'bogus'
+      ]);
+    });
   });
 
   describe('getting output files', function () {
@@ -254,7 +263,7 @@ describe('Glob building', function () {
 });
 
 describe('Integration Tests', function () {
-  describe('Bower', function () {
+  describe('manifests', function () {
     beforeEach(function(done) {
       this.timeout(30e3);
       mkdirp('test/tmp', function () {
@@ -264,12 +273,73 @@ describe('Integration Tests', function () {
       });
     });
 
-    it('should return success', function () {
-      m('test/fixtures/manifest-v1.json', {
-        paths: {
-          bowerDirectory: 'test/tmp/bower_components',
-          bowerJson: 'test/tmp/bower.json'
-        }
+    describe('roots manifest', function () {
+      it('default roots manifest', function () {
+        var output = m('test/fixtures/roots.json', {
+          paths: {
+            bowerDirectory: 'test/tmp/bower_components',
+            bowerJson: 'test/tmp/bower.json'
+          }
+        });
+
+        assert.lengthOf(output.globs.js, 3);
+        assert.lengthOf(output.globs.css, 1);
+
+        // app.css
+        assert.equal(output.globs.css[0].type, 'css');
+        assert.equal(output.globs.css[0].name, 'app.css');
+        assert.lengthOf(output.globs.css[0].globs, 1);
+        assert.include(output.globs.css[0].globs[0], 'main.less');
+
+        // app.js
+        assert.equal(output.globs.js[0].type, 'js');
+        assert.equal(output.globs.js[0].name, 'app.js');
+        assert.include(output.globs.js[0].globs, 'assets/scripts/**/*');
+        _.forEach(output.globs.js[0].globs, function (s) {
+          assert.notInclude(s, 'jquery');
+          assert.notInclude(s, 'modernizr');
+        });
+
+        // jquery.js
+        assert.equal(output.globs.js[1].type, 'js');
+        assert.equal(output.globs.js[1].name, 'jquery.js');
+        assert.lengthOf(output.globs.js[1].globs, 1);
+        assert.include(output.globs.js[1].globs[0], 'jquery.js');
+
+        // modernizr.js
+        assert.equal(output.globs.js[2].type, 'js');
+        assert.equal(output.globs.js[2].name, 'modernizr.js');
+        assert.lengthOf(output.globs.js[2].globs, 1);
+        assert.include(output.globs.js[2].globs[0], 'modernizr.js');
+
+        // has images
+        assert.sameMembers(output.globs.images, [
+          'assets/images/**/*'
+        ]);
+      });
+    });
+
+
+    describe('extremely verbose manifest', function () {
+      it('extremely verbose manifest', function () {
+        var output = m('test/fixtures/verbose.json', {
+          paths: {
+            bowerDirectory: 'test/tmp/bower_components',
+            bowerJson: 'test/tmp/bower.json'
+          }
+        });
+
+        var globs = output.globs;
+
+        assert.sameMembers(_.find(globs.js, { name: 'external.js' }).globs, [
+          '../../noappend.js'
+        ]);
+
+        assert.sameMembers(_.find(globs.js, { name: 'vendor.js' }).globs, [
+          '../../plugin/script.js',
+          'assets/scripts/somescript.js'
+        ]);
+
       });
     });
   });
