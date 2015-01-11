@@ -344,3 +344,41 @@ describe('Integration Tests', function () {
     });
   });
 });
+
+describe('convenience methods', function () {
+  describe('foreach dep', function () {
+    it('should loop through the dependencies', function () {
+      var count = 0;
+      m.Manifest.prototype.forEachDependency.call({
+        globs: {
+          js: [
+            {
+              type: 'js',
+              name: 'script.js',
+              globs: [
+                'class.js',
+                'important.js'
+              ]
+            },
+            {
+              type: 'js',
+              name: 'test.js',
+              globs: [
+                'class.js',
+                'important.js'
+              ]
+            }
+          ]
+        }
+      }, 'js', function (value) {
+        count += 1;
+        assert.equal(value.type, 'js');
+        assert.sameMembers(value.globs, [
+          'class.js',
+          'important.js'
+        ]);
+      });
+      assert.equal(count, 2);
+    });
+  });
+});
