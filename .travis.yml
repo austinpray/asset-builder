@@ -5,9 +5,19 @@ node_js:
 - '0.10'
 cache:
   directories:
-    - test/tmp/bower_components
-script: 
+  - test/tmp/bower_components
+script:
 - npm run-script jshint
 - npm test
 after_script:
 - npm run-script coveralls
+deploy:
+  provider: npm
+  email: austin@austinpray.com
+  api_key:
+    secure: bRoYXumnzrnjQXZHhsFDDAJgDklgceFS6NmzBIqUuubrulg5SDvCIEZ+rXFSgSKcBSG1ebU+3pa/IrlG3TaAS3uQeT4brvl+ChReub+0oAJjn7e8w62Oyso8kengyi6J4r0FaAC4jNjQ8KUxnxIkFHcyWr4hr5AEIy3PXXQHG4Q=
+  on:
+    tags: true
+    repo: austinpray/asset-builder
+    all_branches: true
+    node: '0.10'
