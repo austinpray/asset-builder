@@ -86,6 +86,11 @@ describe('Dependency', function () {
       'test1.js'
     ]);
   });
+  it('should parse the type correctly', function () {
+    assert.equal(Dependency.parseType('app.css'), 'css');
+    assert.equal(Dependency.parseType('app.js'), 'js');
+    assert.equal(Dependency.parseType('app.min.1.11.1.js'), 'js');
+  });
 });
 
 describe('Glob building', function () {
@@ -346,6 +351,49 @@ describe('Integration Tests', function () {
 });
 
 describe('convenience methods', function () {
+  describe('getProjectGlobs', function () {
+    it('should return project JS', function () {
+      var proj = m.Manifest.prototype.getProjectGlobs.call({
+        dependencies: {
+          "app.js": {
+            files: [
+              "app.js",
+              "script.js"
+            ]
+          },
+          "cool.js": {
+            files: [
+              "cool1.js",
+              "cool2.js"
+            ]
+          }
+        }
+      });
+      assert.isArray(proj.js);
+      assert.sameMembers(proj.js, [
+        'app.js',
+        'script.js',
+        "cool1.js",
+        "cool2.js"
+      ]);
+    });
+    it('should return project CSS', function () {
+      var proj = m.Manifest.prototype.getProjectGlobs.call({
+        dependencies: {
+          "app.css": {
+            files: [
+              "app.less",
+              "styles.scss"
+            ]
+          }
+        }
+      });
+      assert.sameMembers(proj.css, [
+        "app.less",
+        "styles.scss"
+      ]);
+    });
+  });
   describe('foreach dep', function () {
     it('should loop through the dependencies', function () {
       var count = 0;
