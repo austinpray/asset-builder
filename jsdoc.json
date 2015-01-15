@@ -1,0 +1,11 @@
+{
+  "source": {
+    "include": [ "lib/", "index.js" ]
+  },
+  "plugins": [],
+  "opts": {
+    "destination": "./docs/api/",
+    "recurse": true,
+    "readme": "lib/README.md"
+  }
+}

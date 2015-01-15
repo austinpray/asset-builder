@@ -2,10 +2,12 @@
   "name": "asset-builder",
   "version": "0.3.0",
   "description": "asset-builder =============",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "coverage": "istanbul cover _mocha -- -R spec test",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "documentation": "npm run jsdoc",
+    "jsdoc": "jsdoc -c jsdoc.json",
     "jshint": "jshint lib/*.js",
     "test": "mocha test"
   },
@@ -23,7 +25,9 @@
     "bower": "*",
     "chai": "*",
     "coveralls": "^2.11.2",
+    "docco": "^0.6.3",
     "istanbul": "^0.3.2",
+    "jsdoc": "^3.3.0-alpha13",
     "jshint": "^2.5.11",
     "mkdirp": "^0.5.0",
     "mocha": "*",
