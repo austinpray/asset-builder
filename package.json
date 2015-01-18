@@ -1,6 +1,6 @@
 {
   "name": "asset-builder",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "asset-builder =============",
   "main": "index.js",
   "scripts": {
