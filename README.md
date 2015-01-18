@@ -12,6 +12,10 @@ Feed me a manifest file and I will give you globs.
 var manifest = require('asset-builder')('./assets/manifest.json');
 ```
 
+## API
+
+[View this module's API documentation](http://use-asset-builder.austinpray.com/api/)
+
 ## Manifest File Specification
 
 [View the detailed specification for the manifest file](SPEC.md)
