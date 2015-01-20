@@ -5,6 +5,11 @@ Feed me a [manifest file](SPEC.md) and I will give you globs.
 
 [![NPM](https://nodei.co/npm/asset-builder.png?downloads=true)](https://nodei.co/npm/asset-builder/)
 
+## Install
+
+```bash
+npm install asset-builder --save-dev
+```
 
 ## Usage 
 
