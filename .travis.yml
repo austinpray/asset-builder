@@ -6,8 +6,11 @@ node_js:
 cache:
   directories:
   - test/tmp/bower_components
+before_script:
+- npm install -g jscs
 script:
 - npm run-script jshint
+- npm run-script jscs
 - npm test
 after_script:
 - npm run-script coveralls
@@ -16,7 +19,7 @@ deploy:
 - provider: s3
   access_key_id:
     secure: jKlbUq7Gy2eOMKQeRCmKb50PYkOt60kOX2bwMCwd4VYBagYQb8lcBPphB5/Llittg10iLFTkrXVGPAfTSsz1/bMEf7AWm6+zKiH4n2YonKB9DUFZKf3+3GiIsXQvlnTt5tEI5dSKvO3y+FKPqKSXHoK9qXyyw8szpZLGimZwWaA=
-  secret_access_key: 
+  secret_access_key:
     secure: ZM8Wnc/w6Hx9ExGeqq2MKJlgy4kBRKLiXVl/DzTCtta5OJKePqssFglc4GWUo/8XOqLiQX7EJ4jw+7B4slXmoo710j/b7UoCyIGDlGIC3oyCWLSwxSD8WOvu01db4BzwkG8jSeiALYyrsexG6uWuf2kxG+fzp+9mNEotQACztew=
   bucket: 'use-asset-builder.austinpray.com'
   region: 'us-west-2'
