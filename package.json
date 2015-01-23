@@ -9,7 +9,8 @@
     "docco": "docco -o docs/docco lib/*.js index.js",
     "documentation": "npm run jsdoc && npm run docco",
     "jsdoc": "jsdoc -c jsdoc.json",
-    "jshint": "jshint lib/*.js",
+    "jshint": "jshint lib/*.js index.js",
+    "jscs": "jscs lib/*.js index.js",
     "test": "mocha test"
   },
   "repository": {
