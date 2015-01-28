@@ -73,6 +73,9 @@ A more extensive `manifest.json` follows. In addition to containing a more depen
   "paths": {
     "source": "assets/",
     "dist": "build/"
+  },
+  "config": {
+    "devUrl": "example.dev"
   }
 }
 ```
@@ -97,6 +100,11 @@ A more extensive `manifest.json` follows. In addition to containing a more depen
       <td>paths</td>
       <td><a href="#serialization-paths">Paths</a></td>
       <td>Defines a project’s input and output locations. A manifest MAY contain a "paths" property.</td>
+    </tr>
+    <tr>
+      <td>config</td>
+      <td>JSON [RFC4627] Object</td>
+      <td>An object containing arbitrary configuration values as properties. This is mainly just a convenience so you can feed static values to your build process. A manifest MAY contain a "config" property.</td>
     </tr>
   </tbody>
 </table>
