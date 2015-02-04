@@ -407,6 +407,43 @@ describe('convenience methods', function () {
       ]);
     });
   });
+  describe('getDependency', function () {
+    var globs = {
+      globs: {
+        css:
+          [ { type: 'css',
+            name: 'main.css',
+            globs: [] },
+            { type: 'css',
+              name: 'editor-style.css',
+              globs: [] } ],
+        js: [
+          {
+          type: 'js',
+          name: 'script.js',
+          globs: [
+            'class.js',
+            'important.js'
+          ]
+        },
+        {
+          type: 'js',
+          name: 'test.js',
+          globs: [
+            'class.js',
+            'important.js'
+          ]
+        }
+        ]
+      }
+    };
+    it('should get a css dependency by name', function () {
+      var css = m.Manifest.prototype.getDependencyByName.call(globs, 'main.css');
+      var js = m.Manifest.prototype.getDependencyByName.call(globs, 'test.js');
+      assert.equal('main.css', css.name);
+      assert.equal('test.js', js.name);
+    });
+  });
   describe('foreach dep', function () {
     it('should loop through the dependencies', function () {
       var count = 0;
