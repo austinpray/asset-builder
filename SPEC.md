@@ -32,7 +32,7 @@ Following is a simple, minimal example of a `manifest.json`:
 }
 ```
 
-A more extensive `manifest.json` follows. In addition to containing a more dependencies, the example contains optional properties such as `paths`. The directory where the compiled files are output has been changed to `build/`. The `app.js` dependency is pulling in a vendor file from a directory outside the project directory. The `homepage.js` dependency has specified an `external` as `true`. This means it will expect to find `custom-dir/homepage.js` and not `assets/custom-dir/homepage.js`. `homepage.js` has also specified that it requires `slick-carousel` as a bower dependency. In this case `slick-carousel` will be excluded from being automatically included in `app.js` and will be included in `homepage.js`. `main.css` in this case only has one file, so its `files` property can optionally be defined as a string. A `fonts` and `images` glob has been specified: if you do not include these properties explicitly they will be automatically added for you.
+A more extensive `manifest.json` follows. 
 
 ```json
 {
@@ -85,6 +85,14 @@ A more extensive `manifest.json` follows. In addition to containing a more depen
   }
 }
 ```
+
+- In addition to containing a more dependencies, the example contains optional properties such as `paths`. 
+- The directory where the compiled files are output has been changed to `build/`. 
+- The `app.js` dependency is pulling in a vendor file from a directory outside the project directory. 
+- The `homepage.js` dependency has specified an `external` as `true`. This means it will expect to find `custom-dir/homepage.js` and not `assets/custom-dir/homepage.js`. 
+- `homepage.js` has also specified that it requires `slick-carousel` as a bower dependency. In this case `slick-carousel` will be excluded from being automatically included in `app.js` and will be included in `homepage.js`. 
+- `main.css` in this case only has one file, so its `files` property can optionally be defined as a string. 
+- A `fonts` and `images` dependency has been specified: if you do not include these properties explicitly they will be automatically added for you.
 
 ### Defaults
 
