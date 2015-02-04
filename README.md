@@ -13,16 +13,20 @@ Feed me a [manifest file](SPEC.md) and I will give you globs.
 npm install asset-builder --save-dev
 ```
 
-## Usage 
+## Usage
 
 ```javascript
 var manifest = require('asset-builder')('./assets/manifest.json');
 ```
 
+## Manifest File Specification
+
+[View the detailed specification for the manifest file](SPEC.md)
+
 ## API
 
 [View this module's API documentation](http://use-asset-builder.austinpray.com/api/)
 
-## Manifest File Specification
+### Annotated Source
 
-[View the detailed specification for the manifest file](SPEC.md)
+[Walk through the source code](http://use-asset-builder.austinpray.com/docco/)
