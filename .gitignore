@@ -31,3 +31,4 @@ test/tmp/
 
 docs/*
 !docs/index.html
+!docs/images
