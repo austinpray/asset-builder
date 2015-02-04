@@ -20,7 +20,7 @@ function bowerSetup(bowerJson) {
   fs.writeFileSync('test/tmp/bower.json', fs.readFileSync('test/fixtures/'+bowerJson));
   bower.commands.prune().on('end', function () {
     bower.commands.install(null, null, { 'cwd': 'test/tmp/' }).on('end', function () {
-      deferred.resolve();  
+      deferred.resolve();
     });
   });
   return deferred.promise;
@@ -96,6 +96,7 @@ describe('Dependency', function () {
 describe('Glob building', function () {
   var manifest;
   var mockBowerFiles = require('./fixtures/sampleMainBowerFiles.json').files;
+  var mockTypesFiles = require('./fixtures/types.json').files;
   var globInstance = new buildGlobs(manifest, mockBowerFiles);
   describe('filtering by package', function () {
     it('should get particular package files by string', function () {
@@ -135,6 +136,16 @@ describe('Glob building', function () {
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff"
       ]);
     });
+    it('should match woff2', function () {
+      assert.sameMembers(globInstance.filterByType(mockTypesFiles, 'fonts'), [
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2",
+        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.otf"
+      ]);
+    });
     it('should get javascript', function () {
       assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'js'), [
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
@@ -172,12 +183,14 @@ describe('Glob building', function () {
       }
     };
     var bower = [
-      '/lol/fonts/test.woff'
+      '/lol/fonts/test.woff',
+      '/lol/fonts/test.woff2'
     ];
     it('should output a fonts glob', function () {
       assert.sameMembers(new buildGlobs(dependencies, bower).globs.fonts, [
         'font/path/*',
-        '/lol/fonts/test.woff'
+        '/lol/fonts/test.woff',
+        '/lol/fonts/test.woff2'
       ]);
     });
     it('should output an images glob', function () {
