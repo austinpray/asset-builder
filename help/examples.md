@@ -5,7 +5,7 @@ asset-builder works great with [gulp][]. But it can be used in pretty much any a
 
 ## Simple Usage With gulp
 
-![simple workflow](docs/images/example1-simple.png)
+![simple workflow](images/example1-simple.png)
 
 ### Regular
 
@@ -67,7 +67,7 @@ Suppose you have a website with the following structure:
 
 The 20 regular pages have nothing to do with graphing. So on those pages d3 and nvd3 are unused dependencies. You run some benchmarks and you conclude that by excluding d3 and nvd3 from your 20 regular pages, you will net a significant performance increase.
 
-![advanced usage](docs/images/example2-js.png)
+![advanced usage](images/example2-js.png)
 
 ### Regular
 

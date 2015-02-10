@@ -24,7 +24,7 @@ deploy:
   bucket: 'use-asset-builder.austinpray.com'
   region: 'us-west-2'
   skip_cleanup: true
-  local_dir: 'docs'
+  local_dir: 'site'
   on:
     tags: true
     repo: austinpray/asset-builder
