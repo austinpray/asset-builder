@@ -29,6 +29,5 @@ node_modules
 
 test/tmp/
 
-docs/*
-!docs/index.html
-!docs/images
+site/*
+!site/index.html
