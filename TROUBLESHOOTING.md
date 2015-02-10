@@ -16,10 +16,7 @@ Some bower packages do not have the correct metadata. To be automatically inject
 {
     "overrides": {
         "BOWER-PACKAGE": {
-            "main": {
-                "development": "file.js",
-                "production": "file.min.js",
-            }
+            "main": ['js/file.js']
         }
     }
 }
