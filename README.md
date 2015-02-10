@@ -19,14 +19,9 @@ npm install asset-builder --save-dev
 var manifest = require('asset-builder')('./assets/manifest.json');
 ```
 
-## Manifest File Specification
+## Help
 
-[View the detailed specification for the manifest file](help/spec.md)
-
-## API
-
-[View this module's API documentation](http://use-asset-builder.austinpray.com/api/)
-
-### Annotated Source
-
-[Walk through the source code](http://use-asset-builder.austinpray.com/docco/)
+- [Examples, troubleshooting tips](help/)
+- [Manifest File Specification](help/spec.md)
+- [View this module's API documentation](http://use-asset-builder.austinpray.com/api/)
+- [Walk through the annotated source code](http://use-asset-builder.austinpray.com/docco/)
