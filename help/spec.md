@@ -45,14 +45,14 @@ A more extensive `manifest.json` follows.
         "scripts/main.js"
       ],
       "vendor": [
-        "../plugins/example-plugin/assets/plugin.js"
+        "../../plugins/example-plugin/assets/plugin.js"
       ],
       "main": true
     },
     "main.css": {
       "files": "styles/main.less",
       "vendor": [
-        "../plugins/example-plugin/assets/style.css"
+        "../../plugins/example-plugin/assets/style.css"
       ],
       "main": true
     },
