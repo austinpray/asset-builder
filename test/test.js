@@ -13,6 +13,13 @@ var bower           = require('bower');
 var Q               = require('q');
 var mkdirp          = require('mkdirp');
 var _               = require('lodash');
+var path            = require('path');
+
+function normalizeAll(files) {
+  return _.map(files, function(f) {
+    return path.normalize(f);
+  });
+}
 
 function bowerSetup(bowerJson) {
   bowerJson = bowerJson || 'bower.json';
@@ -96,58 +103,60 @@ describe('Dependency', function () {
 describe('Glob building', function () {
   var manifest;
   var mockBowerFiles = require('./fixtures/sampleMainBowerFiles.json').files;
+  mockBowerFiles = normalizeAll(mockBowerFiles);
   var mockTypesFiles = require('./fixtures/types.json').files;
+  mockTypesFiles = normalizeAll(mockTypesFiles);
   var globInstance = new buildGlobs(manifest, mockBowerFiles);
   describe('filtering by package', function () {
     it('should get particular package files by string', function () {
       var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, 'jquery');
       assert.isArray(jq);
       assert.sameMembers(jq, [
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+        path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js")
       ]);
     });
     it('should get particular package files by array', function () {
       var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, ['jquery']);
       assert.isArray(jq);
       assert.sameMembers(jq, [
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+        path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js")
       ]);
     });
   });
 
   describe('rejecting by package', function () {
     it('should return everything except specified packages', function () {
-      var rejected = buildGlobs.prototype.rejectByPackage([
+      var rejected = buildGlobs.prototype.rejectByPackage(normalizeAll([
         '/bogus/bower_components/jquery/main.js',
         '/bogus/bower_components/mootools/main.js'
-      ], ['jquery']);
-      assert.sameMembers(rejected, [
+      ]), ['jquery']);
+      assert.sameMembers(rejected, normalizeAll([
         '/bogus/bower_components/mootools/main.js'
-      ]);
+      ]));
     });
   });
 
   describe('filtering by type', function () {
     it('should get fonts', function () {
-      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'fonts'), [
+      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'fonts'), normalizeAll([
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff"
-      ]);
+      ]));
     });
     it('should match woff2', function () {
-      assert.sameMembers(globInstance.filterByType(mockTypesFiles, 'fonts'), [
+      assert.sameMembers(globInstance.filterByType(mockTypesFiles, 'fonts'), normalizeAll([
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.otf"
-      ]);
+      ]));
     });
     it('should get javascript', function () {
-      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'js'), [
+      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'js'), normalizeAll([
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
@@ -161,12 +170,12 @@ describe('Glob building', function () {
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/scrollspy.js",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/tab.js",
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/affix.js",
-      ]);
+      ]));
     });
     it('should get css', function () {
-      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'css'), [
+      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'css'), normalizeAll([
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.css"
-      ]);
+      ]));
     });
   });
 
@@ -223,11 +232,11 @@ describe('Glob building', function () {
   });
 
   describe('getting output files', function () {
-    var mockBower = [
+    var mockBower = normalizeAll([
       "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
       "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
       "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
-    ];
+    ]);
     it('should add bower deps to the main dependency', function () {
       var expected = [
         {
@@ -251,8 +260,8 @@ describe('Glob building', function () {
           type: 'js',
           name: 'app.js',
           globs: [
-            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
-            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
+            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js"),
+            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js"),
             "path/to/script.js"
           ]
         },
@@ -260,7 +269,7 @@ describe('Glob building', function () {
           type: 'js',
           name: 'jquery.js',
           globs: [
-            "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
+            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js"),
           ]
         }
       ];
