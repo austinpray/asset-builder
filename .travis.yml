@@ -38,4 +38,4 @@ deploy:
     tags: true
     repo: austinpray/asset-builder
     all_branches: true
-    node: '0.10'
+    node: '0.12'
