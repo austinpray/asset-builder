@@ -1,7 +1,7 @@
 {
   "name": "asset-builder",
   "version": "1.0.2",
-  "description": "asset-builder =============",
+  "description": "assembles and orchestrates your dependencies so you can run them through your asset pipeline.",
   "main": "index.js",
   "scripts": {
     "coverage": "istanbul cover _mocha -- -R spec test",
