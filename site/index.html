@@ -6,41 +6,302 @@
     <title>asset-builder</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      html, body {
-        font-family: sans-serif;
-      }
-      main {
-        max-width: 30em;
-        margin: 0 auto;
-      }
-      h1 {
-        text-align: center;
-      }
-      .main-links {
-        font-size: 1.2em;
-        line-height: 1.14;
-        margin: 0;
-        padding:0;
-        list-style: none;
-        text-align: center;
-      }
-      .main-links li {
-        margin-bottom: 0.618em;
-      }
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/superhero/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+pre .hll { background-color: #ffffcc }
+pre  { background: #f0f0f0; }
+pre .c { color: #60a0b0; font-style: italic } /* Comment */
+pre .err { border: 1px solid #FF0000 } /* Error */
+pre .k { color: #007020; font-weight: bold } /* Keyword */
+pre .o { color: #666666 } /* Operator */
+pre .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+pre .cp { color: #007020 } /* Comment.Preproc */
+pre .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+pre .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+pre .gd { color: #A00000 } /* Generic.Deleted */
+pre .ge { font-style: italic } /* Generic.Emph */
+pre .gr { color: #FF0000 } /* Generic.Error */
+pre .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre .gi { color: #00A000 } /* Generic.Inserted */
+pre .go { color: #888888 } /* Generic.Output */
+pre .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+pre .gs { font-weight: bold } /* Generic.Strong */
+pre .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre .gt { color: #0044DD } /* Generic.Traceback */
+pre .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+pre .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+pre .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+pre .kp { color: #007020 } /* Keyword.Pseudo */
+pre .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+pre .kt { color: #902000 } /* Keyword.Type */
+pre .m { color: #40a070 } /* Literal.Number */
+pre .s { color: #4070a0 } /* Literal.String */
+pre .na { color: #4070a0 } /* Name.Attribute */
+pre .nb { color: #007020 } /* Name.Builtin */
+pre .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+pre .no { color: #60add5 } /* Name.Constant */
+pre .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+pre .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+pre .ne { color: #007020 } /* Name.Exception */
+pre .nf { color: #06287e } /* Name.Function */
+pre .nl { color: #002070; font-weight: bold } /* Name.Label */
+pre .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+pre .nt { color: #062873; font-weight: bold } /* Name.Tag */
+pre .nv { color: #bb60d5 } /* Name.Variable */
+pre .ow { color: #007020; font-weight: bold } /* Operator.Word */
+pre .w { color: #bbbbbb } /* Text.Whitespace */
+pre .mb { color: #40a070 } /* Literal.Number.Bin */
+pre .mf { color: #40a070 } /* Literal.Number.Float */
+pre .mh { color: #40a070 } /* Literal.Number.Hex */
+pre .mi { color: #40a070 } /* Literal.Number.Integer */
+pre .mo { color: #40a070 } /* Literal.Number.Oct */
+pre .sb { color: #4070a0 } /* Literal.String.Backtick */
+pre .sc { color: #4070a0 } /* Literal.String.Char */
+pre .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+pre .s2 { color: #4070a0 } /* Literal.String.Double */
+pre .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+pre .sh { color: #4070a0 } /* Literal.String.Heredoc */
+pre .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+pre .sx { color: #c65d09 } /* Literal.String.Other */
+pre .sr { color: #235388 } /* Literal.String.Regex */
+pre .s1 { color: #4070a0 } /* Literal.String.Single */
+pre .ss { color: #517918 } /* Literal.String.Symbol */
+pre .bp { color: #007020 } /* Name.Builtin.Pseudo */
+pre .vc { color: #bb60d5 } /* Name.Variable.Class */
+pre .vg { color: #bb60d5 } /* Name.Variable.Global */
+pre .vi { color: #bb60d5 } /* Name.Variable.Instance */
+pre .il { color: #40a070 } /* Literal.Number.Integer.Long */.syntax pre .hll { background-color: #ffffcc }
+.syntax pre  { background: #f0f0f0; }
+.syntax pre .c { color: #60a0b0; font-style: italic } /* Comment */
+.syntax pre .err { border: 1px solid #FF0000 } /* Error */
+.syntax pre .k { color: #007020; font-weight: bold } /* Keyword */
+.syntax pre .o { color: #666666 } /* Operator */
+.syntax pre .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.syntax pre .cp { color: #007020 } /* Comment.Preproc */
+.syntax pre .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.syntax pre .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.syntax pre .gd { color: #A00000 } /* Generic.Deleted */
+.syntax pre .ge { font-style: italic } /* Generic.Emph */
+.syntax pre .gr { color: #FF0000 } /* Generic.Error */
+.syntax pre .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.syntax pre .gi { color: #00A000 } /* Generic.Inserted */
+.syntax pre .go { color: #888888 } /* Generic.Output */
+.syntax pre .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.syntax pre .gs { font-weight: bold } /* Generic.Strong */
+.syntax pre .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.syntax pre .gt { color: #0044DD } /* Generic.Traceback */
+.syntax pre .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.syntax pre .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.syntax pre .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.syntax pre .kp { color: #007020 } /* Keyword.Pseudo */
+.syntax pre .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.syntax pre .kt { color: #902000 } /* Keyword.Type */
+.syntax pre .m { color: #40a070 } /* Literal.Number */
+.syntax pre .s { color: #4070a0 } /* Literal.String */
+.syntax pre .na { color: #4070a0 } /* Name.Attribute */
+.syntax pre .nb { color: #007020 } /* Name.Builtin */
+.syntax pre .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.syntax pre .no { color: #60add5 } /* Name.Constant */
+.syntax pre .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.syntax pre .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.syntax pre .ne { color: #007020 } /* Name.Exception */
+.syntax pre .nf { color: #06287e } /* Name.Function */
+.syntax pre .nl { color: #002070; font-weight: bold } /* Name.Label */
+.syntax pre .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.syntax pre .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.syntax pre .nv { color: #bb60d5 } /* Name.Variable */
+.syntax pre .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.syntax pre .w { color: #bbbbbb } /* Text.Whitespace */
+.syntax pre .mb { color: #40a070 } /* Literal.Number.Bin */
+.syntax pre .mf { color: #40a070 } /* Literal.Number.Float */
+.syntax pre .mh { color: #40a070 } /* Literal.Number.Hex */
+.syntax pre .mi { color: #40a070 } /* Literal.Number.Integer */
+.syntax pre .mo { color: #40a070 } /* Literal.Number.Oct */
+.syntax pre .sb { color: #4070a0 } /* Literal.String.Backtick */
+.syntax pre .sc { color: #4070a0 } /* Literal.String.Char */
+.syntax pre .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.syntax pre .s2 { color: #4070a0 } /* Literal.String.Double */
+.syntax pre .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.syntax pre .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.syntax pre .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.syntax pre .sx { color: #c65d09 } /* Literal.String.Other */
+.syntax pre .sr { color: #235388 } /* Literal.String.Regex */
+.syntax pre .s1 { color: #4070a0 } /* Literal.String.Single */
+.syntax pre .ss { color: #517918 } /* Literal.String.Symbol */
+.syntax pre .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.syntax pre .vc { color: #bb60d5 } /* Name.Variable.Class */
+.syntax pre .vg { color: #bb60d5 } /* Name.Variable.Global */
+.syntax pre .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.syntax pre .il { color: #40a070 } /* Literal.Number.Integer.Long */
     </style>
   </head>
   <body>
     <!-- Add your site or application content here -->
-    <main>
-      <h1>asset-builder</h1>
-      <ul class="main-links">
-        <li><a href="https://github.com/austinpray/asset-builder">Github Repo</a></li>
-        <li><a href="api/">Module Documentation</a></li>
-        <li><a href="https://github.com/austinpray/asset-builder/blob/master/help/spec.md">Manifest Spec</a></li>
-        <li><a href="docco/">Annotated Source</a></li>
-      </ul>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="navbar-brand">asset-builder</span>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="docco/">Annotated Source</a></li>
+          <li><a href="https://github.com/austinpray/asset-builder/blob/master/help/spec.md">Manifest Spec</a></li>
+          <li><a href="api/">Module Documentation</a></li>
+          <li><a href="https://github.com/austinpray/asset-builder">Github Repo</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container-fluid">
+      <div class="jumbotron text-center">
+        <h1>Build a Better Gulpfile</h1>
+        <p>asset-builder assembles and orchestrates your dependencies so you
+        can run them through your asset pipeline. Easily create gulp tasks you
+        can share between projects by separating config from code.</p>
+        <p>
+          <a
+             class="btn btn-primary btn-lg"
+             href="https://github.com/austinpray/asset-builder"
+             role="button">GitHub Repo</a>
+        </p>
+        <p>
+          <a href="https://www.npmjs.com/package/asset-builder">
+            <img src="https://badge.fury.io/js/asset-builder.svg" alt="npm version" height="18">
+          </a>
+          <a href="https://travis-ci.org/austinpray/asset-builder">
+            <img src="https://travis-ci.org/austinpray/asset-builder.svg?branch=master">
+          </a>
+          <a href="https://ci.appveyor.com/project/austinpray/asset-builder">
+            <img src="https://ci.appveyor.com/api/projects/status/grdwl6vflm7l68i6/branch/master?svg=true">
+          </a>
+          <a href='https://coveralls.io/r/austinpray/asset-builder?branch=master'>
+            <img src='https://coveralls.io/repos/austinpray/asset-builder/badge.svg?branch=master' alt='Coverage Status'>
+          </a>
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-header">Automate Repetitive Glob Building.</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <p class="lead">asset-builder allows you to declare the output of your Gulpfile in an external manifest file.</p>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">manifest.json</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="hlcode">
+                    <div class="syntax"><pre><span class="p">{</span>
+  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;app.js&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;scripts/services/**/*.js&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scripts/controllers.js&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scripts/main.js&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;main&quot;</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></pre></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p>So you can stop doing this...</p>
+              <div class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title">gulpfile.js</h3>
+                </div>
+                <div class="panel-body">
+<div class="hlcode">
+<div class="syntax"><pre><span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">([</span>
+  <span class="s1">&#39;bower_components/jquery/jquery.js&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;bower_components/bootstrap/component.js&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scripts/services/**/*.js&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scripts/controllers.js&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;scripts/main.js&#39;</span>
+<span class="p">])</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">concat</span><span class="p">(</span><span class="s1">&#39;app.js&#39;</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">minify</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;dist&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p>...and start doing this</p>
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title">gulpfile.js</h3>
+                </div>
+                <div class="panel-body">
+<div class="hlcode">
+<div class="syntax"><pre><span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="nx">js</span><span class="p">.</span><span class="nx">globs</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">concat</span><span class="p">(</span><span class="nx">js</span><span class="p">.</span><span class="nx">name</span><span class="p">))</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">minify</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="nx">manifest</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">dist</span><span class="p">));</span>
+</pre></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-header">Automate Repetitive Glob Building.</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Install</h3>
+          <div class="panel panel-default ">
+            <div class="panel-body">
+              <kbd>
+                npm install asset-builder --save-dev
+              </kbd>
+            </div>
+            <div class="panel-footer">In your project directory.</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Use</h3>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="hlcode">
+                <div class="syntax"><pre><span class="kd">var</span> <span class="nx">manifest</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;asset-builder&#39;</span><span class="p">)(</span><span class="s1">&#39;./assets/manifest.json&#39;</span><span class="p">);</span></pre></div>
+              </div>
+            </div>
+            <div class="panel-footer">In your Gulpfile.</div>
+          </div>
+          <div class="list-group">
+            <a href="https://github.com/austinpray/asset-builder/tree/master/help" class="list-group-item">
+              <h4 class="list-group-item-heading">Examples</h4>
+            </a>
+            <a href="https://github.com/austinpray/asset-builder/blob/master/help/spec.md" class="list-group-item">
+              <h4 class="list-group-item-heading">Manifest Specification</h4>
+              <p class="list-group-item-text">Learn about the JSON manifest asset-builder reads.</p>
+            </a>
+            <a href="api/" class="list-group-item">
+              <h4 class="list-group-item-heading">Module API Documentation</h4>
+              <p class="list-group-item-text">Detailed rundown of asset-builder's public and private API.</p>
+            </a>
+            <a href="docco/" class="list-group-item">
+              <h4 class="list-group-item-heading">Annotated Source</h4>
+              <p class="list-group-item-text">Walk through the asset-builder source line by line.</p>
+            </a>
+          </div>
+        </div>
+      </div>
     </main>
+    <footer class="text-center">
+      <p><small>Built with much love by <a href="http://austinpray.com">Austin Pray</a></small></p>
+    </footer>
 
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
