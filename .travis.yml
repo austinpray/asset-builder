@@ -29,7 +29,7 @@ deploy:
     tags: true
     repo: austinpray/asset-builder
     all_branches: true
-    node: '0.10'
+    node: '0.12'
 - provider: npm
   email: austin@austinpray.com
   api_key:
