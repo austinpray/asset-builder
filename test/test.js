@@ -76,6 +76,10 @@ describe('Dependency', function () {
   });
   var depBare = new Dependency('app.css', {
   });
+  var depVendor = new Dependency('app.js', {
+    vendor: ['assets/vendor1.js', 'assets/vendor2.js'],
+    files: ['firstparty1.js', 'firstparty2.js']
+  });
   it('should set properties correctly', function () {
     assert.equal(dep.type, 'js');
     assert.equal(depBare.type, 'css');
@@ -84,6 +88,14 @@ describe('Dependency', function () {
       'test1.js'
     ]);
     assert.sameMembers(depBare.globs, []);
+  });
+  it('should put globs in order', function () {
+    assert.equal(dep.globs[0], 'test.js');
+    assert.equal(dep.globs[1], 'test1.js');
+    assert.equal(depVendor.globs[0], 'assets/vendor1.js');
+    assert.equal(depVendor.globs[1], 'assets/vendor2.js');
+    assert.equal(depVendor.globs[2], 'firstparty1.js');
+    assert.equal(depVendor.globs[3], 'firstparty2.js');
   });
   it('should prependGlobs correctly', function () {
     dep.prependGlobs('new.js');
@@ -366,6 +378,9 @@ describe('Integration Tests', function () {
           '../../plugin/script.js',
           'assets/scripts/somescript.js'
         ]);
+
+        assert.equal(_.find(globs.js, { name: 'vendor.js' }).globs[0], '../../plugin/script.js');
+        assert.equal(_.find(globs.js, { name: 'vendor.js' }).globs[1], 'assets/scripts/somescript.js');
 
       });
     });
