@@ -312,9 +312,9 @@ describe('Integration Tests', function () {
       });
     });
 
-    describe('roots manifest', function () {
-      it('default roots manifest', function () {
-        var output = m('test/fixtures/roots.json', {
+    describe('sage manifest', function () {
+      it('default sage manifest', function () {
+        var output = m('test/fixtures/sage.json', {
           paths: {
             bowerDirectory: 'test/tmp/bower_components',
             bowerJson: 'test/tmp/bower.json'
