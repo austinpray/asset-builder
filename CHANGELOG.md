@@ -1,4 +1,5 @@
 ### HEAD
+* .jpg, .png, and .gif files are now pulled from bower dependencies if specified in the "main" attribute ([#33](https://github.com/austinpray/asset-builder/issues/33))
 * Add more tests to confirm vendor order ([#30](https://github.com/austinpray/asset-builder/pull/30))
 * Rename `roots.json` to `sage.json` ([#29](https://github.com/austinpray/asset-builder/pull/29))
 
