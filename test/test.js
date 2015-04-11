@@ -157,6 +157,13 @@ describe('Glob building', function () {
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff"
       ]));
     });
+    it('should get images', function () {
+      assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'images'), normalizeAll([
+        "/Some/Path/images/imagesGIF.gif",
+        "/Some/Path/images/imagesPNG.png",
+        "/Some/Path/images/imagesJPG.jpg"
+      ]));
+    });
     it('should match woff2', function () {
       assert.sameMembers(globInstance.filterByType(mockTypesFiles, 'fonts'), normalizeAll([
         "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
@@ -205,7 +212,10 @@ describe('Glob building', function () {
     };
     var bower = [
       '/lol/fonts/test.woff',
-      '/lol/fonts/test.woff2'
+      '/lol/fonts/test.woff2',
+      '/lol/images/imageJPG.jpg',
+      '/lol/images/imagePNG.png',
+      '/lol/images/imageGIF.gif'
     ];
     it('should output a fonts glob', function () {
       assert.sameMembers(new buildGlobs(dependencies, bower).globs.fonts, [
@@ -216,7 +226,10 @@ describe('Glob building', function () {
     });
     it('should output an images glob', function () {
       assert.sameMembers(new buildGlobs(dependencies, bower).globs.images, [
-        'image/path/*'
+        'image/path/*',
+        '/lol/images/imageJPG.jpg',
+        '/lol/images/imagePNG.png',
+        '/lol/images/imageGIF.gif'
       ]);
     });
     it('should output a bower glob', function () {
