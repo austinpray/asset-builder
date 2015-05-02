@@ -2,10 +2,10 @@
 
 ## Examples
 
-- [Simple Usage Examples](examples.md) general isolated usage with gulp.
-- [Sage 8.0.0](https://github.com/roots/roots/blob/8.0.0/gulpfile.js) good
-    production example of advanced usage with gulp. [See their manifest as
-    well.](https://github.com/roots/roots/blob/8.0.0/assets/manifest.json)
+- [Simple Usage Examples](examples.md) - general isolated usage with gulp
+- [Sage 8.0.0](https://github.com/roots/roots/blob/8.0.0/gulpfile.js) - good
+    production example of advanced usage with gulp ([see their manifest as
+    well](https://github.com/roots/roots/blob/8.0.0/assets/manifest.json))
 
 ## Troubleshooting
 
