@@ -142,4 +142,62 @@ gulp.task('js', function() {
 - **Separate build input from build process** The declarative manifest format makes build output easier to discern.
 - **All grouped asset types use the same pipeline.** Increases build consistency and maintainability.
 
+## Pull Vendor Assets from External Folder (WordPress Plugin, Composer)
+
+![pull from composer](images/example3-composer.png)
+
+### Regular
+
+```js
+```js
+gulp.src([
+  'bower_components/jquery/jquery.js',
+  'bower_components/bootstrap/component.js',
+  '../../plugins/WordPress-plugin/scripts/plugin.js',
+  'assets/scripts/main.js'
+])
+  .pipe(concat('app.js'))
+  .pipe(minify())
+  .pipe(gulp.dest('dist'));
+```
+
+### asset-builder
+
+#### `assets/manifest.json`
+
+```json
+{
+  "dependencies": {
+    "app.js": {
+      "vendor": [
+        "../../plugins/WordPress-plugin/scripts/plugin.js"
+      ],
+      "files": ["scripts/main.js"],
+      "main": true
+    },
+  },
+  "paths": {
+    "source": "assets/",
+    "dist": "dist/"
+  }
+}
+```
+
+#### `gulpfile.js`
+
+```js
+var manifest = require('asset-builder')('./assets/manifest.json');
+
+var app = manifest.getDependencyByName('app.js');
+
+gulp.src(app.globs)
+  .pipe(concat(app.name))
+  .pipe(minify())
+  .pipe(gulp.dest(manifest.paths.dist));
+```
+
+### The Vendor Property
+
+The vendor property is a part of the dependency serialization.
+
 [gulp]: http://gulpjs.com/
