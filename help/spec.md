@@ -228,7 +228,12 @@ A more extensive `manifest.json` follows.
     <tr>
       <td>external</td>
       <td>boolean</td>
-      <td>Describes whether or not the source (`path.source`) directory will be prepended to each glob in the "files" property. A Dependency MAY have an "external" property.</td>
+      <td>
+        Describes whether or not the source (`path.source`) directory will be
+        prepended to each glob in the "files" property. A Dependency MAY have an
+        "external" property. The external property should be considered `false`
+        by default.
+      </td>
     </tr>
   </tbody>
 </table>
