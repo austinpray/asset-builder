@@ -218,8 +218,8 @@ on these files.
 
 #### Example
 
-This assumes your `path.source` is `assets/` and the dependency's `external`
-property is not explicitly set to `true`. Assume a project structure such as:
+This assumes your `path.source` is `assets/`. Assume a project structure such
+as:
 
 <pre><code>
 .
