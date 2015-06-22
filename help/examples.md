@@ -149,7 +149,6 @@ gulp.task('js', function() {
 ### Regular
 
 ```js
-```js
 gulp.src([
   'bower_components/jquery/jquery.js',
   'bower_components/bootstrap/component.js',
@@ -198,6 +197,22 @@ gulp.src(app.globs)
 
 ### The Vendor Property
 
-The vendor property is a part of the dependency serialization.
+The vendor property is a part of the [dependency serialization][dependency]. Why
+would you use the `vendor` property instead of the `files` property? What kind
+of file paths would you put inside `vendor` but not inside `files`?
+
+A path inside the `files` property such as `scripts/main.js` will be transformed
+to `assets/scripts/main.js` if your manifest's `paths.source` is `assets/` and
+the dependency's `external` property is not set to `true`.
+
+It follows that you would want to put all your first-party project scripts
+inside the `files` property. Feel free to run your linters, styleguide checkers,
+beautifiers, and more on these files.
+
+The `vendor` property is for third-party code you have no control over. You
+should not run project-specific linters, styleguide checkers, beautifiers, etc.
+on these files.
 
 [gulp]: http://gulpjs.com/
+[dependency]: spec.md#serialization-dependency
+[paths]: spec.md#serialization-paths

@@ -197,12 +197,23 @@ A more extensive `manifest.json` follows.
     <tr>
       <td>files</td>
       <td>JSON [RFC4627] Array of Strings <strong>OR</strong> String</td>
-      <td>Describes a list of file paths to local project files in <a href="#footnotes-globs">glob format</a>. A Dependency MAY contain a "files" property.</td>
+      <td>
+        Describes a list of file paths to local project files in <a
+        href="#footnotes-globs">glob format</a>. A Dependency MAY contain a
+        "files" property. These are generally first-party project files. You
+        can run all of your linters and styleguide checkers on these files.
+      </td>
     </tr>
     <tr>
       <td>vendor</td>
       <td>JSON [RFC4627] Array of Strings <strong>OR</strong> String</td>
-      <td>Describes a list of file paths to vendored project files in <a href="#footnotes-globs">glob format</a>. A Dependency MAY contain a "files " property.</td>
+      <td>
+        Describes a list of file paths to vendored project files in <a
+        href="#footnotes-globs">glob format</a>. A Dependency MAY contain a
+        "vendor" property. Generally you should treat these dependencies as
+        third-party code. That means you should not run linters and styleguide
+        checkers on these files.
+      </td>
     </tr>
     <tr>
       <td>bower</td>
