@@ -201,7 +201,9 @@ A more extensive `manifest.json` follows.
         Describes a list of file paths to local project files in <a
         href="#footnotes-globs">glob format</a>. A Dependency MAY contain a
         "files" property. These are generally first-party project files. You
-        can run all of your linters and styleguide checkers on these files.
+        can run all of your linters and styleguide checkers on these files. By
+        default `path.source` will be prepended to each glob in this collection.
+        To turn this behavior off, one sets the `external` property to true.
       </td>
     </tr>
     <tr>
