@@ -236,8 +236,8 @@ as:
   <thead>
     <tr>
       <th>Property</th>
-      <th>Path Before</th>
-      <th>Path After</th>
+      <th>Manifest Path</th>
+      <th>Refers to</th>
     </tr>
   </thead>
   <tbody>
