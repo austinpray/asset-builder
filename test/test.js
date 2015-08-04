@@ -124,14 +124,14 @@ describe('Glob building', function () {
       var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, 'jquery');
       assert.isArray(jq);
       assert.sameMembers(jq, [
-        path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js")
+        path.normalize("/asset-builder/bower_components/jquery/dist/jquery.js")
       ]);
     });
     it('should get particular package files by array', function () {
       var jq = buildGlobs.prototype.filterByPackage(mockBowerFiles, ['jquery']);
       assert.isArray(jq);
       assert.sameMembers(jq, [
-        path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js")
+        path.normalize("/asset-builder/bower_components/jquery/dist/jquery.js")
       ]);
     });
   });
@@ -151,10 +151,10 @@ describe('Glob building', function () {
   describe('filtering by type', function () {
     it('should get fonts', function () {
       assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'fonts'), normalizeAll([
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff"
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff"
       ]));
     });
     it('should get images', function () {
@@ -166,34 +166,34 @@ describe('Glob building', function () {
     });
     it('should match woff2', function () {
       assert.sameMembers(globInstance.filterByType(mockTypesFiles, 'fonts'), normalizeAll([
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/fonts/glyphicons-halflings-regular.otf"
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2",
+        "/asset-builder/bower_components/bootstrap/fonts/glyphicons-halflings-regular.otf"
       ]));
     });
     it('should get javascript', function () {
       assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'js'), normalizeAll([
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/button.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/carousel.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/collapse.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/dropdown.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/modal.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/tooltip.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/popover.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/scrollspy.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/tab.js",
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/affix.js",
+        "/asset-builder/bower_components/jquery/dist/jquery.js",
+        "/asset-builder/bower_components/bootstrap/js/transition.js",
+        "/asset-builder/bower_components/bootstrap/js/alert.js",
+        "/asset-builder/bower_components/bootstrap/js/button.js",
+        "/asset-builder/bower_components/bootstrap/js/carousel.js",
+        "/asset-builder/bower_components/bootstrap/js/collapse.js",
+        "/asset-builder/bower_components/bootstrap/js/dropdown.js",
+        "/asset-builder/bower_components/bootstrap/js/modal.js",
+        "/asset-builder/bower_components/bootstrap/js/tooltip.js",
+        "/asset-builder/bower_components/bootstrap/js/popover.js",
+        "/asset-builder/bower_components/bootstrap/js/scrollspy.js",
+        "/asset-builder/bower_components/bootstrap/js/tab.js",
+        "/asset-builder/bower_components/bootstrap/js/affix.js",
       ]));
     });
     it('should get css', function () {
       assert.sameMembers(globInstance.filterByType(mockBowerFiles, 'css'), normalizeAll([
-        "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/bogus/file.css"
+        "/asset-builder/bower_components/bootstrap/bogus/file.css"
       ]));
     });
   });
@@ -258,9 +258,9 @@ describe('Glob building', function () {
 
   describe('getting output files', function () {
     var mockBower = normalizeAll([
-      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js",
-      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js",
-      "/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js",
+      "/asset-builder/bower_components/jquery/dist/jquery.js",
+      "/asset-builder/bower_components/bootstrap/js/transition.js",
+      "/asset-builder/bower_components/bootstrap/js/alert.js",
     ]);
     it('should add bower deps to the main dependency', function () {
       var expected = [
@@ -285,8 +285,8 @@ describe('Glob building', function () {
           type: 'js',
           name: 'app.js',
           globs: [
-            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/transition.js"),
-            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/bootstrap/js/alert.js"),
+            path.normalize("/asset-builder/bower_components/bootstrap/js/transition.js"),
+            path.normalize("/asset-builder/bower_components/bootstrap/js/alert.js"),
             "path/to/script.js"
           ]
         },
@@ -294,7 +294,7 @@ describe('Glob building', function () {
           type: 'js',
           name: 'jquery.js',
           globs: [
-            path.normalize("/Users/austinpray/DEV/opensauce/asset-builder/test/tmp/bower_components/jquery/dist/jquery.js"),
+            path.normalize("/asset-builder/bower_components/jquery/dist/jquery.js"),
           ]
         }
       ];
