@@ -40,11 +40,11 @@ Don't try to do:
 }
 ```
 
-If you need to define paths in structure mentioned above add own custom key eg.
+If you need to define paths in structure mentioned above (and any custom options) you have to use "config" key.
 
 ```
 {
-  "folders": {
+  "config": {
     "source": {
       "whatever": "src/somenthing",
       "whtever2": "src/something_else"
