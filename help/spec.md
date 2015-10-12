@@ -202,7 +202,7 @@ A more extensive `manifest.json` follows.
     <tr>
       <td>vendor</td>
       <td>JSON [RFC4627] Array of Strings <strong>OR</strong> String</td>
-      <td>Describes a list of file paths to vendored project files in <a href="#footnotes-globs">glob format</a>. A Dependency MAY contain a "files " property.</td>
+      <td>Describes a list of file paths to vendored project files in <a href="#footnotes-globs">glob format</a>. A Dependency MAY contain a "vendor " property.</td>
     </tr>
     <tr>
       <td>bower</td>
