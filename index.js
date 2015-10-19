@@ -1,13 +1,10 @@
-/**
- * Manifest
- * @module asset-builder
- */
 'use strict';
 
 var Manifest = require('./lib/Manifest.js');
 
 /**
  * Create an instance of [Manifest]{@link module:lib/Manifest~Manifest}
+ *
  * @see [Manifest]{@link module:lib/Manifest~Manifest}
  * @param {String} path File path to the manifest JSON file
  * @param {Object} options
