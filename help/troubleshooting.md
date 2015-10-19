@@ -21,3 +21,34 @@ Some bower packages do not have the correct metadata. To be automatically inject
     }
 }
 ```
+
+## manifest.json file
+
+### Strange [object Object] before file name
+
+While overriding "paths" key inside `manifest.json` file you can't use any custom objects.
+
+Don't try to do:
+```
+{
+  "paths": {
+    "source": {
+      "whatever": "src/somenthing",
+      "whtever2": "src/something_else"
+    }
+  }
+}
+```
+
+If you need to define paths in structure mentioned above (and any custom options) you have to use "config" key.
+
+```
+{
+  "config": {
+    "source": {
+      "whatever": "src/somenthing",
+      "whtever2": "src/something_else"
+    }
+  }
+}
+```
