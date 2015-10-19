@@ -14,6 +14,7 @@ var Q               = require('q');
 var mkdirp          = require('mkdirp');
 var _               = require('lodash');
 var path            = require('path');
+var validateOptions = require('../lib/validateOptions');
 
 function normalizeAll(files) {
   return _.map(files, function(f) {
@@ -42,6 +43,41 @@ describe('JSON Reading and Parsing', function(){
   });
   it('should return an object if JSON is valid', function(){
     assert.isObject(readManifest('test/fixtures/manifest-v1.json'));
+  });
+});
+
+describe('Options validation', function () {
+  it('it should throw an error if path is not a string', function () {
+    assert.throws(function () {
+      m({ bogus: true });
+    }, Error, 'must be a string');
+  });
+  it('it should correctly process valid options', function () {
+    var options = validateOptions({
+      makePathsRelative: true,
+      paths: {
+        bowerDirectory: 'test/tmp/bower_components',
+        bowerJson: 'test/tmp/bower.json'
+      }
+    });
+    assert.equal(options.makePathsRelative, true);
+  });
+  it('it should throw an error if options is something other than undefined or an object', function () {
+    assert.throws(function () {
+      validateOptions('watermelon emoji');
+    }, Error, 'supposed to be an object');
+  });
+  it('it should throw an error if makePathsRelative is not a boolean', function () {
+    assert.throws(function () {
+      validateOptions({
+        makePathsRelative: 'bogus'
+      });
+    }, Error, 'must be a boolean');
+  });
+  it('it should load the defaults successfully', function () {
+    var options = validateOptions();
+    assert.isObject(options);
+    assert.equal(options.makePathsRelative, false);
   });
 });
 
@@ -310,6 +346,50 @@ describe('Glob building', function () {
       mockBower);
       assert.sameMembers(actual[0].globs, expected[0].globs, 'app.js not the same');
       assert.sameMembers(actual[1].globs, expected[1].globs, 'jquery not the same');
+    });
+  });
+
+  describe('makeRelative', function () {
+    it('should throw an error if glob is ')
+  });
+
+  describe('options', function () {
+    it('should make all paths relative if makePathsRelative is true', function () {
+      var makeAbsolute = function (target) {
+        return path.join(__dirname, target);
+      };
+      var expected = [
+        {
+          type: 'js',
+          name: 'app.js',
+          globs: [
+            path.normalize(makeAbsolute("/asset-builder/bower_components/bootstrap/js/transition.js")),
+            path.normalize(makeAbsolute("/asset-builder/bower_components/bootstrap/js/alert.js")),
+            "path/to/script.js"
+          ]
+        },
+        {
+          type: 'js',
+          name: 'jquery.js',
+          globs: [
+            path.normalize("asset-builder/bower_components/jquery/dist/jquery.js"),
+          ]
+        }
+      ];
+      var actual = buildGlobs.prototype.getOutputFiles('js', {
+        "app.js": {
+          files: ['path/to/script.js'],
+          main: true
+        },
+        "jquery.js": {
+          bower: ['jquery']
+        }
+      },
+      [
+        path.normalize(makeAbsolute("/asset-builder/bower_components/bootstrap/js/transition.js")),
+        path.normalize(makeAbsolute("/asset-builder/bower_components/bootstrap/js/alert.js"))
+      ]);
+      assert.equal(actual[0].globs[0], 'asset-builder/bower_components/bootstrap/js/alert.js');
     });
   });
 });

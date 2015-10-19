@@ -15,9 +15,36 @@ npm install asset-builder --save-dev
 
 ## Usage
 
+### asset-builder(path[, options])
+
 ```javascript
 var manifest = require('asset-builder')('./assets/manifest.json');
 ```
+
+#### path
+
+Type: `String`
+
+Path to your manifest. Manifest must be a valid JSON file that conforms to the [Manifest Spec](help/spec.md)
+
+#### options
+
+Type: `Object`
+
+Modify how the manifest is processed.
+
+#### options.makePathsRelative
+
+Type: `Boolean` Default: `false`
+
+For every file glob in the manifest, make the glob path relative to where
+asset-builder is being run from.
+
+#### options.paths
+
+Type: `Object` or `String`
+
+Passed directly to the options for [main-bower-files](https://github.com/ck86/main-bower-files#paths)
 
 ## Help
 
