@@ -86,7 +86,7 @@ A more extensive `manifest.json` follows.
 }
 ```
 
-- In addition to containing a more dependencies, the example contains optional properties such as `paths`.
+- In addition to containing more dependencies, the example contains optional properties such as `paths`.
 - The directory where the compiled files are output has been changed to `build/`.
 - The `app.js` dependency is pulling in a vendor file from a directory outside the project directory.
 - The `homepage.js` dependency has specified an `external` as `true`. This means it will expect to find `custom-dir/homepage.js` and not `assets/custom-dir/homepage.js`.
