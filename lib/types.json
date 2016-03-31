@@ -1,6 +1,6 @@
 {
   "fonts": "*.{eot,otf,svg,ttc,ttf,woff,woff2}",
   "js": "*.js",
-  "css": "*.css",
+  "css": "*.{css,scss,sass}",
   "images": "*.{jpg,png,gif}"
 }
