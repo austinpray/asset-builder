@@ -93,6 +93,7 @@ A more extensive `manifest.json` follows.
 - `homepage.js` has also specified that it requires `slick-carousel` as a bower dependency. In this case `slick-carousel` will be excluded from being automatically included in `app.js` and will be included in `homepage.js`.
 - `main.css` in this case only has one file, so its `files` property can optionally be defined as a string.
 - A `fonts` and `images` dependency has been specified: if you do not include these properties explicitly they will be automatically added for you.
+- A path inside the *files* property such as `scripts/main.js` will be transformed to `assets/scripts/main.js` if your manifest's paths.source is `assets/` and the dependency's external property is not set to true. The *vendor* property paths are **relative to your project root**. If you are using gulp, this is typically where your gulpfile.js is located.
 
 ### Defaults
 
