@@ -153,27 +153,23 @@ A more extensive `manifest.json` follows.
       <th>Description</th>
     </tr>
   </thead>
-
   <tbody>
     <tr>
       <td>{{NAME}}.js</td>
       <td><a href="#serialization-dependency">Dependency</a></td>
       <td>Defines project’s output files by listing the inputs as <a href="#serialization-dependency">Dependency</a> objects. A manifest MAY contain one or more JS Dependencies.</td>
     </tr>
-
     <tr>
       <td>{{NAME}}.css</td>
       <td><a href="#serialization-dependency">Dependency</a></td>
       <td>Defines project’s output files by listing the inputs as <a href="#serialization-dependency">Dependency</a> objects. A manifest MAY contain one or more CSS Dependencies.</td>
     </tr>
-
     <tr>
       <td>fonts</td>
       <td><a href="#serialization-dependency">Dependency</a></td>
       <td>Defines a project’s fonts. If this is not explicitly defined by the user it will be automatically defined with a files property as <code>'fonts/**/*'</code>.
       A Dependencies MAY contain a "fonts" property.</td>
     </tr>
-
     <tr>
       <td>images</td>
       <td><a href="#serialization-dependency">Dependency</a></td>
