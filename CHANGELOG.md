@@ -1,5 +1,9 @@
 ### HEAD
 
+### 1.1.3: December 3, 2018
+* Quick and dirty dependency updates to patch packages with vulnerabilities
+* Fix code broken by lodash 4
+
 ### 1.1.0: April 11th, 2015
 * .jpg, .png, and .gif files are now pulled from bower dependencies if specified in the "main" attribute ([#33](https://github.com/austinpray/asset-builder/issues/33))
 * Add more tests to confirm vendor order ([#30](https://github.com/austinpray/asset-builder/pull/30))
