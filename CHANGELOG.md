@@ -1,6 +1,6 @@
 ### HEAD
 
-### 1.1.3: December 3, 2018
+### 2.0.0: December 3, 2018
 * Quick and dirty dependency updates to patch packages with vulnerabilities
 * Fix code broken by lodash 4
 
