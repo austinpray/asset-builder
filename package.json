@@ -1,6 +1,6 @@
 {
   "name": "asset-builder",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "assembles and orchestrates your dependencies so you can run them through your asset pipeline.",
   "main": "index.js",
   "scripts": {
