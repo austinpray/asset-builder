@@ -1,5 +1,8 @@
 ### HEAD
 
+### 2.0.1: February 11, 2021
+* Fixed High vulnerability which was causing due to `object-path` dependency.
+
 ### 2.0.0: December 3, 2018
 * Quick and dirty dependency updates to patch packages with vulnerabilities
 * Fix code broken by lodash 4
